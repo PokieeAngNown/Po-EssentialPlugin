@@ -1,0 +1,6 @@
+name: EssentialPlugin
+version: '${project.version}'
+main: cn.PoStudio.EP
+api-version: 1.20
+authors: [ PokieeAkuno_411 ]
+description: Basic stuff for New Server and PoStudio's Plugin
