@@ -1,0 +1,10 @@
+#########
+#语言文件
+#支持PlaceholderAPI变量
+#使用变量前请先下载对应的PAPI变量库
+#任何基础词条都能进行修改
+#########
+CheckCommand:
+  Check_PlayerLevel: "[Po] 玩家%player_name%的等级为%player_level%"
+  Check_PlayerExp: "[Po] 玩家%player_name%的经验为%player_exp%"
+  Check_PlayerLocalInformation: "[Po] 玩家所处世界为%player_world%|坐标为[%player_x%,%player_y%,%player_z%]"
