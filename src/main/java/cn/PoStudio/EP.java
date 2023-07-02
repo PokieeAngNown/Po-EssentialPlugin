@@ -1,7 +1,5 @@
 package cn.PoStudio;
 
-import cn.PoStudio.Command.CheckCommand;
-import cn.PoStudio.Tab.CheckTab;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -44,21 +42,20 @@ public final class EP extends JavaPlugin {
     @Override
     public void onLoad(){
         // Plugin load logic
-        createLanguageYamlFile();
+        createYamlFile();
         getLogger().warning("|||Po-EP| Essential Plugin on loading...");
     }
 
 
 
-    public void createLanguageYamlFile(){
+    public void createYamlFile(){
+        this.saveResource("config.yml", false);
         this.saveResource("language/zh_CN.yml", false);
     }
 
     public void loadCommand(){
-        Objects.requireNonNull(getCommand("check")).setExecutor(new CheckCommand());
     }
     public void loadTab(){
-        Objects.requireNonNull(getCommand("check")).setTabCompleter(new CheckTab());
     }
 
     /*
@@ -67,7 +64,8 @@ public final class EP extends JavaPlugin {
     public File languageF;
     public static FileConfiguration languageCFG;
     public void HandleDefaultFile(){
-        languageF = new File(this.getDataFolder().getPath() + "/language", "zh_CN.yml");
+        String language = this.getConfig().getString("Language");
+        languageF = new File(this.getDataFolder().getPath() + "/language", language + ".yml");
         languageCFG = YamlConfiguration.loadConfiguration(languageF);
     }
 }
