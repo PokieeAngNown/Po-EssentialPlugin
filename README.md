@@ -11,4 +11,5 @@
 
 [Bilibili主页](https://space.bilibili.com/260626090) | [爱发电](https://afdian.net/a/Po-Plugin)
 
-在这里可以看我的开发安排: [ToDo](https://to-do.microsoft.com/tasks/sharing?InvitationToken=phnqzxSZVRzMgFIFHe8HrgLcoaPZk5SpYx_Ptze17yMCxgB0HwtnJJvKw0i_y_jWo)
+在这里下载正式版插件: [蓝奏云](https://wwet.lanzouw.com/iHAZs12ce7na) | 密码:gaub
+
