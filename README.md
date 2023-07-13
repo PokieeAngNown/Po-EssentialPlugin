@@ -12,4 +12,4 @@
 [Bilibili主页](https://space.bilibili.com/260626090) | [爱发电](https://afdian.net/a/Po-Plugin)
 
 在这里下载正式版插件: [蓝奏云](https://wwet.lanzouw.com/iHAZs12ce7na) | 密码:gaub
-
+                    [阿里云盘](https://www.aliyundrive.com/s/n94kB3wu2VG)
