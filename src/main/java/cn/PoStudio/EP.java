@@ -1,14 +1,20 @@
 package cn.PoStudio;
 
+import cn.PoStudio.Vault.mainVault;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.*;
 
 public final class EP extends JavaPlugin {
+
+    public static Plugin plugin;
 
     @Override
     public void onEnable() {
@@ -21,6 +27,7 @@ public final class EP extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
         }else{
             getLogger().warning("|||Po-EP| Found the depend: PlaceholderAPI" + Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
+            new RegPlaceholderAPI().register();
         }
         ///
         //本插件启动检测
@@ -54,8 +61,10 @@ public final class EP extends JavaPlugin {
     }
 
     public void loadCommand(){
+        Objects.requireNonNull(getCommand("vault")).setExecutor(new mainVault());
     }
     public void loadTab(){
+        Objects.requireNonNull(getCommand("vault")).setTabCompleter(new mainVault());
     }
 
     /*
@@ -67,5 +76,8 @@ public final class EP extends JavaPlugin {
         String language = this.getConfig().getString("Language");
         languageF = new File(this.getDataFolder().getPath() + "/language", language + ".yml");
         languageCFG = YamlConfiguration.loadConfiguration(languageF);
+    }
+    public static String HandlePlaceholderAPI(Player player, String string){
+        return PlaceholderAPI.setPlaceholders(player, string);
     }
 }

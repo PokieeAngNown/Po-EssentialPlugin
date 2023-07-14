@@ -5,6 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
+
 public class handleNBT {
     public static void setNBT(Entity entity, NamespacedKey key, Object value){
         PersistentDataContainer dataContainer = entity.getPersistentDataContainer();
@@ -28,7 +29,7 @@ public class handleNBT {
             System.out.print("data类型错误");
         }
     }
-    public Object getNBT(Entity entity, NamespacedKey key){
+    public static Object getNBT(Entity entity, NamespacedKey key){
         PersistentDataContainer dataContainer = entity.getPersistentDataContainer();
         Object object = null;
         if (dataContainer.has(key, PersistentDataType.STRING)){
@@ -47,12 +48,21 @@ public class handleNBT {
             object = dataContainer.get(key, PersistentDataType.BYTE);
         }else if (dataContainer.has(key, PersistentDataType.DOUBLE)){
             object = dataContainer.get(key, PersistentDataType.DOUBLE);
-        }else{
-            System.out.print("找不到data类型");
         }
         return object;
     }
-    public void removeNBT(Entity entity, NamespacedKey key){
+    public static boolean hasNBT(Entity entity, NamespacedKey key){
+        PersistentDataContainer dataContainer = entity.getPersistentDataContainer();
+        return dataContainer.has(key, PersistentDataType.STRING) ||
+                dataContainer.has(key, PersistentDataType.INTEGER) ||
+                dataContainer.has(key, PersistentDataType.BOOLEAN) ||
+                dataContainer.has(key, PersistentDataType.LONG) ||
+                dataContainer.has(key, PersistentDataType.SHORT) ||
+                dataContainer.has(key, PersistentDataType.FLOAT) ||
+                dataContainer.has(key, PersistentDataType.BYTE) ||
+                dataContainer.has(key, PersistentDataType.DOUBLE);
+    }
+    public static void removeNBT(Entity entity, NamespacedKey key){
         PersistentDataContainer dataContainer = entity.getPersistentDataContainer();
         dataContainer.remove(key);
     }

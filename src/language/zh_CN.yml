@@ -4,3 +4,12 @@
 #使用变量前请先下载对应的PAPI变量库
 #任何基础词条都能进行修改
 #########
+InvalidCommand: "§f[§c!§f] 指令无效~"
+Vault:
+  OutOfInteger: "§f[§e!§f] 数字超出了范围"
+  VaultTypeNotFound: "§f[§e!§f] 没有找到该经济类型"
+  GetPlayerVault: "§f[§e!§f] 玩家的money数值为%Po-EssentialPlugin_PlayerMoney%"
+  SetPlayerVault: "§f[§e!§f] 成功设置 §e%player_name% §f的钱包 \n  §f当前money为 §e%Po-EssentialPlugin_PlayerMoney%$"
+  AddPlayerVault: "§f[§e!§f] 成功添加 §e%player_name% §f的钱包 \n  §f当前money为 §e%Po-EssentialPlugin_PlayerMoney%$"
+  TakePlayerVault: "§f[§e!§f] 成功减少 §e%player_name% §f的钱包 \n  §f当前money为 §e%Po-EssentialPlugin_PlayerMoney%$"
+

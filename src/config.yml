@@ -1,2 +1,6 @@
+##请不要修改 添加 删减 VaultType内的任何货币类型 可能会引起报错
+##若要注册经济类型请查询github: https://github.com/PokieeAngNown/Po-EssentialPlugin
+VaultType:
+  - money
 
 Language: zh_CN
