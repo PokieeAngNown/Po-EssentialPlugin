@@ -8,3 +8,5 @@ depend: [PlaceholderAPI]
 commands:
   vault:
     description: ""
+  hologram:
+    description: ""

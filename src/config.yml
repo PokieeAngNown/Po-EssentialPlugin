@@ -4,3 +4,23 @@ VaultType:
   - money
 
 Language: zh_CN
+
+##全息视图默认设置 可以通过/hologram option 来调整单独调整设置
+Hologram:
+  ##全息视图一行文本的最大宽度 如果展示文本超过了这个宽度会进行换行 默认为200
+  LineWidth: 200
+  ##全息视图文本对齐方向
+  ##可以为:
+  ##center（居中）
+  ##left（左对齐）
+  ##right（右对齐）
+  Alignment: center
+  ##全息视图文本是否显示阴影 默认为false
+  Shadow: false
+  ##全息视图模型根据玩家视角进行变换的行为
+  ##可以为:
+  ##fixed（垂直和水平角度都固定）
+  ##vertical（按照垂直轴旋转跟随玩家视角）
+  ##horizontal（按照水平轴旋转跟随玩家视角）
+  ##center（按照中心旋转跟随玩家视角）。
+  Billboard: center

@@ -66,4 +66,7 @@ public class handleNBT {
         PersistentDataContainer dataContainer = entity.getPersistentDataContainer();
         dataContainer.remove(key);
     }
+    public static Boolean isSetNBT(Entity entity, NamespacedKey key, Object object){
+        return handleNBT.getNBT(entity, key) == object;
+    }
 }

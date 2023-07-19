@@ -1,20 +1,28 @@
 package cn.PoStudio;
 
+import cn.PoStudio.Hologram.mainHologram;
 import cn.PoStudio.Vault.mainVault;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.*;
+import java.util.Objects;
 
 public final class EP extends JavaPlugin {
 
-    public static Plugin plugin;
+    public static FileConfiguration languageCFG;
+    /*
+        文件加载
+     */
+    public File languageF;
+
+    public static String HandlePlaceholderAPI(Player player, String string){
+        return PlaceholderAPI.setPlaceholders(player, string);
+    }
 
     @Override
     public void onEnable() {
@@ -53,31 +61,26 @@ public final class EP extends JavaPlugin {
         getLogger().warning("|||Po-EP| Essential Plugin on loading...");
     }
 
-
-
     public void createYamlFile(){
         this.saveResource("config.yml", false);
+        this.saveResource("hologramList.yml", false);
         this.saveResource("language/zh_CN.yml", false);
     }
 
     public void loadCommand(){
         Objects.requireNonNull(getCommand("vault")).setExecutor(new mainVault());
-    }
-    public void loadTab(){
-        Objects.requireNonNull(getCommand("vault")).setTabCompleter(new mainVault());
+        Objects.requireNonNull(getCommand("hologram")).setExecutor(new mainHologram());
     }
 
-    /*
-        文件加载
-     */
-    public File languageF;
-    public static FileConfiguration languageCFG;
+    public void loadTab(){
+        Objects.requireNonNull(getCommand("vault")).setTabCompleter(new mainVault());
+        Objects.requireNonNull(getCommand("hologram")).setTabCompleter(new mainHologram());
+    }
+
+
     public void HandleDefaultFile(){
         String language = this.getConfig().getString("Language");
         languageF = new File(this.getDataFolder().getPath() + "/language", language + ".yml");
         languageCFG = YamlConfiguration.loadConfiguration(languageF);
-    }
-    public static String HandlePlaceholderAPI(Player player, String string){
-        return PlaceholderAPI.setPlaceholders(player, string);
     }
 }

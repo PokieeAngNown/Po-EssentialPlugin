@@ -1,7 +1,6 @@
 package cn.PoStudio;
 
 import cn.PoStudio.Vault.mainVault;
-
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +18,7 @@ public class RegPlaceholderAPI extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getVersion() {
-        return "1.0.0.1-SNAPSHOT";
+        return "1.0.0.9-SNAPSHOT";
     }
 
     @Override
