@@ -1,0 +1,28 @@
+Language: zh_CN
+####################################
+####多人服务器列表展示 (ServerList)####
+####################################
+##服务器列表里服务器展示的文字
+##最多只支持2行文字 多出部分不显示
+MOTD:
+  - "§3§lNew §b§lServer §f§l[1.20]"
+  - "§3§l§m       §b§l§m       §f§l§m       §r    §4§lSupported §c§lBy §f§lPoPlugin"
+##服务器列表里服务器展示的图标
+##将图片文件放在插件文件夹中 ServerIcon填入文件名[要带后缀]
+##图片文件像素大小必须是16的倍数且是正方形 建议64x64
+ServerIcon: "Icon.png"
+##服务器列表里服务器展示的最大人数
+##仅展示用 并不影响实际服务器设置的最大人数限制
+MaxPlayerDisplay: 100000
+######################
+####玩家聊天 (Chat)####
+######################
+Chat:
+  ##玩家聊天的格式
+  ##.DisplayName.、.Message.为重要变量 不是placeholderAPI变量
+  ##两个重要变量不能缺少 缺少则显示默认聊天格式
+  Format: "{POEP_PlayerPrefix}.DisplayName.{POEP_PlayerSuffix} -> .Message."
+  ##聊天是否显示变量
+  ##若为true 则会以聊天发出人来计算变量
+  ##只影响.Message.的内容
+  PlaceHolderAPI: true

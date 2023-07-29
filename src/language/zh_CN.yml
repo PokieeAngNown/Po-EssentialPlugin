@@ -1,0 +1,33 @@
+#########
+#语言文件
+#词条支持两种格式
+# Key: "asdasd"
+# Key:
+#   - "asdasd"
+#   - "asdasd"
+#请务必以此格式为前提进行修改
+###
+#支持PlaceholderAPI变量
+#使用变量前请先下载对应的PAPI变量库
+#任何词条都能进行修改
+###
+#若出现类似{NickName}之类的字符串
+#则为插件自变量 请勿删去 可能会报错
+#########
+InvalidCommand: "§f[§c!§f] 指令无效~"
+Nick:
+  NickAlreadyStore:
+    - "§f[§c!§f] 指令运行失败~"
+    - "§f原因: §c该缀名识别名已经存在"
+  NickNotFound:
+    - "§f[§c!§f] 指令运行失败~"
+    - "§f原因: §c无法找到该缀名识别名"
+  CreateComplete:
+    - "§f[§a!§f] 缀名创建完成!!"
+    - "§f缀名识别名: {NickName}"
+    - "§f缀名内容: {NickString}"
+  RemoveComplete:
+    - "§f[§a!§f] 缀名删除完成!!"
+    - "§f缀名识别名: {NickName}"
+  GivePlayerNick: "§f[§a!§f] 成功将 {NickName} 赋予玩家"
+  ShowNickString: "§f[§a!§f] 成功将 {NickName} 赋予玩家"

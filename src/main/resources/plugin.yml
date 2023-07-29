@@ -1,0 +1,16 @@
+name: EssentialPlugin
+version: 1.0.0-Beta
+main: cn.PoStudio.EssentialPluginAPI
+api-version: 1.20
+authors: [ PokieeAkuno_411 ]
+description: Basic stuff for New Server and PoStudio's Plugin
+depend: [PlaceholderAPI]
+prefix: Po-EP
+commands:
+  EssentialPlugin:
+    description: Plugin stuff
+    aliases:
+      - POEP
+      - EP
+  nick:
+    description: Nick Player
