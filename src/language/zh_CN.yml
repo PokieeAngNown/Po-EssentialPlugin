@@ -30,4 +30,5 @@ Nick:
     - "§f[§a!§f] 缀名删除完成!!"
     - "§f缀名识别名: {NickName}"
   GivePlayerNick: "§f[§a!§f] 成功将 {NickName} 赋予玩家"
-  ShowNickString: "§f[§a!§f] 成功将 {NickName} 赋予玩家"
+  RemovePlayerNick: "§f[§a!§f] 成功清空玩家的缀名 类型:{NickType}"
+  ShowNickString: "§f[§a!§f] 缀名 {NickName} 的内容为:{NickString}"

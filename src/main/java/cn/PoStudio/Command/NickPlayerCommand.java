@@ -19,8 +19,8 @@ public class NickPlayerCommand implements CommandExecutor, TabCompleter {
         $/nick create [prefix/suffix] [name] [string]
         $/nick remove [prefix/suffix] [name]
         $/nick give [player] [prefix/suffix] [name]
-        /nick show [prefix/suffix] [name]
-        /nick clear [prefix/suffix/all] [player]
+        $/nick show [prefix/suffix] [name]
+        $/nick clear [prefix/suffix/all] [player]
      */
     String message;
     @Override
@@ -62,6 +62,7 @@ public class NickPlayerCommand implements CommandExecutor, TabCompleter {
                                     .replace("{NickString}", nickString.toString());
                         }
                         sender.sendMessage(message);
+                        break;
                     }
                     case "suffix": {
                         if (ChatNickName.isNickStore(ChatNickName.NickType.SUFFIX, nickName)){
@@ -73,8 +74,10 @@ public class NickPlayerCommand implements CommandExecutor, TabCompleter {
                                     .replace("{NickString}", nickString.toString());
                         }
                         sender.sendMessage(message);
+                        break;
                     }
                 }
+                break;
             }
             case "remove": {
                 if (args.length != 3){
@@ -94,6 +97,7 @@ public class NickPlayerCommand implements CommandExecutor, TabCompleter {
                             message = EssentialPluginAPI.handleMessage("Nick.NickNotFound", sender);
                         }
                         sender.sendMessage(message);
+                        break;
                     }
                     case "suffix": {
                         if (ChatNickName.isNickStore(ChatNickName.NickType.SUFFIX, nickName)){
@@ -104,8 +108,10 @@ public class NickPlayerCommand implements CommandExecutor, TabCompleter {
                             message = EssentialPluginAPI.handleMessage("Nick.NickNotFound", sender);
                         }
                         sender.sendMessage(message);
+                        break;
                     }
                 }
+                break;
             }
             case "give": {
                 if (args.length != 4){
@@ -126,6 +132,7 @@ public class NickPlayerCommand implements CommandExecutor, TabCompleter {
                             message = EssentialPluginAPI.handleMessage("Nick.NickNotFound", sender);
                         }
                         sender.sendMessage(message);
+                        break;
                     }
                     case "suffix": {
                         if (ChatNickName.isNickStore(ChatNickName.NickType.SUFFIX, nickName)){
@@ -136,8 +143,10 @@ public class NickPlayerCommand implements CommandExecutor, TabCompleter {
                             message = EssentialPluginAPI.handleMessage("Nick.NickNotFound", sender);
                         }
                         sender.sendMessage(message);
+                        break;
                     }
                 }
+                break;
             }
             case "show": {
                 if (args.length != 3){
@@ -150,16 +159,62 @@ public class NickPlayerCommand implements CommandExecutor, TabCompleter {
                 switch (nickType){
                     case "prefix": {
                         if (ChatNickName.isNickStore(ChatNickName.NickType.PREFIX, nickName)){
-                            message = EssentialPluginAPI.handleMessage("Nick.GivePlayerNick", sender)
-                                    .replace("{NickName}", nickName);
+                            message = EssentialPluginAPI.handleMessage("Nick.ShowNickString", sender)
+                                    .replace("{NickName}", nickName)
+                                    .replace("{NickString}", ChatNickName.getNick(ChatNickName.NickType.SUFFIX, nickName));
                         }else{
                             message = EssentialPluginAPI.handleMessage("Nick.NickNotFound", sender);
                         }
+                        sender.sendMessage(message);
+                        break;
                     }
                     case "suffix": {
-
+                        if (ChatNickName.isNickStore(ChatNickName.NickType.SUFFIX, nickName)){
+                            message = EssentialPluginAPI.handleMessage("Nick.ShowNickString", sender)
+                                    .replace("{NickName}", nickName)
+                                    .replace("{NickString}", ChatNickName.getNick(ChatNickName.NickType.SUFFIX, nickName));
+                        }else{
+                            message = EssentialPluginAPI.handleMessage("Nick.NickNotFound", sender);
+                        }
+                        sender.sendMessage(message);
+                        break;
                     }
                 }
+                break;
+            }
+            case "clear": {
+                if (args.length != 3){
+                    message = EssentialPluginAPI.handleMessage("InvalidCommand", sender);
+                    sender.sendMessage(message);
+                    return true;
+                }
+                String nickType = args[1];
+                Player target = Bukkit.getPlayerExact(args[2]);
+                switch (nickType){
+                    case "prefix": {
+                        ChatNickName.NickPlayer(target, ChatNickName.NickType.PREFIX, "");
+                        message = EssentialPluginAPI.handleMessage("Nick.RemovePlayerNick", sender)
+                                .replace("{NickType}", "Prefix");
+                        sender.sendMessage(message);
+                        break;
+                    }
+                    case "suffix": {
+                        ChatNickName.NickPlayer(target, ChatNickName.NickType.SUFFIX, "");
+                        message = EssentialPluginAPI.handleMessage("Nick.RemovePlayerNick", sender)
+                                .replace("{NickType}", "Suffix");
+                        sender.sendMessage(message);
+                        break;
+                    }
+                    case "all": {
+                        ChatNickName.NickPlayer(target, ChatNickName.NickType.PREFIX, "");
+                        ChatNickName.NickPlayer(target, ChatNickName.NickType.SUFFIX, "");
+                        message = EssentialPluginAPI.handleMessage("Nick.RemovePlayerNick", sender)
+                                .replace("{NickType}", "All");
+                        sender.sendMessage(message);
+                        break;
+                    }
+                }
+                break;
             }
         }
         return true;
@@ -168,32 +223,37 @@ public class NickPlayerCommand implements CommandExecutor, TabCompleter {
     @Nullable
     @Override
     public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String string, @NotNull String[] args) {
+        List<Player> playerList = new ArrayList<Player>(Bukkit.getOnlinePlayers());
+        List<String> stringList = new ArrayList<>();
+        for (Player player : playerList) {
+            stringList.add(player.getDisplayName());
+        }
         if (args.length == 1){
-            return List.of("create", "remove", "give");
+            return List.of("create", "remove", "give", "show", "clear");
         }
         switch (args[0]){
-            case "create", "remove":
+            case "create": {
+                if (args.length == 2){
+                    return List.of("prefix", "suffix");
+                }
+                break;
+            }
+            case "remove": {
                 if (args.length == 2){
                     return List.of("prefix", "suffix");
                 }
                 if (args.length == 3){
-                    if (!args[0].equals("create")){
-                        if (args[1].equals("prefix")){
-                            return ChatNickName.getNickList(ChatNickName.NickType.PREFIX);
-                        }
-                        if (args[1].equals("suffix")){
-                            return ChatNickName.getNickList(ChatNickName.NickType.SUFFIX);
-                        }
+                    if (args[1].equals("prefix")){
+                        return ChatNickName.getNickList(ChatNickName.NickType.PREFIX);
+                    }
+                    if (args[1].equals("suffix")){
+                        return ChatNickName.getNickList(ChatNickName.NickType.SUFFIX);
                     }
                 }
                 break;
-            case "give":
+            }
+            case "give": {
                 if (args.length == 2){
-                    List<Player> playerList = new ArrayList<Player>(Bukkit.getOnlinePlayers());
-                    List<String> stringList = new ArrayList<>();
-                    for (Player player : playerList) {
-                        stringList.add(player.getDisplayName());
-                    }
                     return stringList;
                 }
                 if (args.length == 3){
@@ -208,6 +268,30 @@ public class NickPlayerCommand implements CommandExecutor, TabCompleter {
                     }
                 }
                 break;
+            }
+            case "show": {
+                if (args.length == 2){
+                    return List.of("prefix", "suffix");
+                }
+                if (args.length == 3){
+                    if (args[1].equals("prefix")){
+                        return ChatNickName.getNickList(ChatNickName.NickType.PREFIX);
+                    }
+                    if (args[1].equals("suffix")){
+                        return ChatNickName.getNickList(ChatNickName.NickType.SUFFIX);
+                    }
+                }
+                break;
+            }
+            case "clear": {
+                if (args.length == 2){
+                    return List.of("prefix", "suffix", "all");
+                }
+                if (args.length == 3){
+                    return stringList;
+                }
+                break;
+            }
         }
         return new ArrayList<>();
     }
