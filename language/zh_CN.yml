@@ -1,35 +1,25 @@
 #########
-#语言文件
-#词条支持两种格式
-# Key: "asdasd"
-# Key:
-#   - "asdasd"
-#   - "asdasd"
-#请务必以此格式为前提进行修改
-###
-#支持PlaceholderAPI变量
-#使用变量前请先下载对应的PAPI变量库
-#任何词条都能进行修改
-###
-#若出现类似{NickName}之类的字符串
-#则为插件自变量 请勿删去 可能会报错
+##语言文件
+##词条支持两种格式
+## Key: "asdasd"
+## Key:
+##   - "asdasd"
+##   - "asdasd"
+##请务必以此格式为前提进行修改
+######
+######
+##支持PlaceholderAPI变量
+##使用变量前请先下载对应的PAPI变量库
+##若不是指定词条 则会返回发出人的PAPI变量
+######
+######
+##以{}括起来的是插件语言自变量 仅所在词条有效
 #########
-InvalidCommand: "§f[§c!§f] 指令无效~"
+InvalidCommand: "§f[§c!§f] 指令无效~\n§f[§c!§f] 用法: {Usage}"
 NoPermission: "§f[§c!§f] 无权限"
-Nick:
-  NickAlreadyStore:
-    - "§f[§c!§f] 指令运行失败~"
-    - "§f原因: §c该缀名识别名已经存在"
-  NickNotFound:
-    - "§f[§c!§f] 指令运行失败~"
-    - "§f原因: §c无法找到该缀名识别名"
-  CreateComplete:
-    - "§f[§a!§f] 缀名创建完成!!"
-    - "§f缀名识别名: {NickName}"
-    - "§f缀名内容: {NickString}"
-  RemoveComplete:
-    - "§f[§a!§f] 缀名删除完成!!"
-    - "§f缀名识别名: {NickName}"
-  GivePlayerNick: "§f[§a!§f] 成功将 {NickName} 赋予玩家"
-  RemovePlayerNick: "§f[§a!§f] 成功清空玩家的缀名 类型:{NickType}"
-  ShowNickString: "§f[§a!§f] 缀名 {NickName} 的内容为:{NickString}"
+Group:
+  CreateSuccess: "§f[§a!§f]玩家识别符 §b{GroupName} §f创建成功"
+  DeleteSuccess: "§f[§a!§f]玩家识别符 §b{GroupName} §f删除成功"
+  List:
+    - "服务器有以下玩家识别符"
+    - "{GroupList}"

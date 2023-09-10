@@ -1,4 +1,4 @@
-package cn.PoStudio.EntityNBT;
+package cn.PoStudio.DataBase;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
@@ -23,8 +23,10 @@ public class handleNBT {
             dataContainer.set(key, PersistentDataType.FLOAT, (Float) value);
         }else if (value instanceof Byte){
             dataContainer.set(key, PersistentDataType.BYTE, (Byte) value);
-        }else if (value instanceof Double){
+        }else if (value instanceof Double) {
             dataContainer.set(key, PersistentDataType.DOUBLE, (Double) value);
+        }else if(value instanceof PersistentDataContainer){
+            dataContainer.set(key, PersistentDataType.TAG_CONTAINER, (PersistentDataContainer)value);
         }else{
             System.out.print("data类型错误");
         }
@@ -48,6 +50,8 @@ public class handleNBT {
             object = dataContainer.get(key, PersistentDataType.BYTE);
         }else if (dataContainer.has(key, PersistentDataType.DOUBLE)){
             object = dataContainer.get(key, PersistentDataType.DOUBLE);
+        }else if (dataContainer.has(key, PersistentDataType.TAG_CONTAINER)){
+            object = dataContainer.get(key, PersistentDataType.TAG_CONTAINER);
         }
         return object;
     }
@@ -60,7 +64,8 @@ public class handleNBT {
                 dataContainer.has(key, PersistentDataType.SHORT) ||
                 dataContainer.has(key, PersistentDataType.FLOAT) ||
                 dataContainer.has(key, PersistentDataType.BYTE) ||
-                dataContainer.has(key, PersistentDataType.DOUBLE);
+                dataContainer.has(key, PersistentDataType.DOUBLE) ||
+                dataContainer.has(key, PersistentDataType.TAG_CONTAINER);
     }
     public static void removeNBT(Entity entity, NamespacedKey key){
         PersistentDataContainer dataContainer = entity.getPersistentDataContainer();

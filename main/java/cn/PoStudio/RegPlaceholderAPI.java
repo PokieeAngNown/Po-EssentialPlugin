@@ -2,7 +2,6 @@ package cn.PoStudio;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class RegPlaceholderAPI extends PlaceholderExpansion {
@@ -28,12 +27,6 @@ public class RegPlaceholderAPI extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer player, String params) {
-        if (params.equalsIgnoreCase("PlayerPrefix")){
-            return ChatNickName.getPlayerPrefix((Player) player);
-        }
-        if (params.equalsIgnoreCase("PlayerSuffix")){
-            return ChatNickName.getPlayerSuffix((Player) player);
-        }
         return null;
     }
 }

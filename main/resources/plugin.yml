@@ -7,9 +7,16 @@ description: Basic stuff for New Server and PoStudio's Plugin
 depend: [PlaceholderAPI]
 prefix: Po-EP
 commands:
-  nick:
-    description: Nick Player
+  group:
+    description: The Command that can control Group
+    usage: /group <list/create/delete/addPlayer/removePlayer> [GroupName] [PlayerName]
 permissions:
-  essentialplugin.nick:
-    default: false
-    description: The command that can nick player
+  EP.Group:
+    default: op
+    description: The Permission in Group Command
+    children:
+      EP.Group.list: true
+      EP.Group.create: true
+      EP.Group.delete: true
+      EP.Group.addPlayer: true
+      EP.Group.rmeovePlayer: true
