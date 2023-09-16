@@ -1,6 +1,7 @@
 package cn.PoStudio.Event;
 
 import cn.PoStudio.EssentialPluginAPI;
+import cn.PoStudio.GiftPack;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +19,7 @@ public class JoinExitEvent implements Listener {
         String s;
         UUID playerUUID = playerJoinEvent.getPlayer().getUniqueId();
         if (playerJoinEvent.getPlayer().hasPlayedBefore()){
+            //玩家之前玩过
             if (!isPlayerHasDataFile(playerUUID)) {
                 createPlayerFile(playerUUID);
                 setDefaultData(playerUUID);
@@ -25,12 +27,18 @@ public class JoinExitEvent implements Listener {
 
             s = EssentialPluginAPI.getPlugin().getConfig().getString("PlayerJoinMessage");
         }else{
+            //玩家之前没玩过
             if (!isPlayerHasDataFile(playerUUID)) {
                 createPlayerFile(playerUUID);
                 setDefaultData(playerUUID);
             }
 
             s = EssentialPluginAPI.getPlugin().getConfig().getString("PlayerFirstJoinMessage");
+            //玩家礼物
+            Object object = EssentialPluginAPI.getPlugin().getConfig().get("PlayerFirstJoinGift");
+            if (object != null){
+                GiftPack.sendGift(object.toString(), playerJoinEvent.getPlayer());
+            }
         }
         assert s != null;
         playerJoinEvent.setJoinMessage(PlaceholderAPI.setPlaceholders(playerJoinEvent.getPlayer(), s));
