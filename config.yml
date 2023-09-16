@@ -2,6 +2,9 @@ Language: zh_CN
 #######################
 ####常规设置(Normal)####
 #######################
+##玩家首次登入时的礼物 将会读取giftPack.yml内的物品 如果不给礼物则输入null
+PlayerFirstJoinGift: NewbiePack
+##玩家登入登出行为消息
 PlayerFirstJoinMessage: "Welcome New Player Join Server"
 PlayerJoinMessage: "§f[§a+§f] %player_name%"
 PlayerQuitMessage: "§f[§c-§f] %player_name%"

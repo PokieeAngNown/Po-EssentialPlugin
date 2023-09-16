@@ -7,6 +7,8 @@ description: Basic stuff for New Server and PoStudio's Plugin
 depend: [PlaceholderAPI]
 prefix: Po-EP
 commands:
+  gift:
+    description: The command that can control group
   group:
     description: The Command that can control Group
     usage: /group <list/create/delete/addPlayer/removePlayer> [GroupName] [PlayerName]

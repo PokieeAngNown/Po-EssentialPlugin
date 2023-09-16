@@ -17,9 +17,8 @@
 #########
 InvalidCommand: "§f[§c!§f] 指令无效~\n§f[§c!§f] 用法: {Usage}"
 NoPermission: "§f[§c!§f] 无权限"
-Group:
-  CreateSuccess: "§f[§a!§f]玩家识别符 §b{GroupName} §f创建成功"
-  DeleteSuccess: "§f[§a!§f]玩家识别符 §b{GroupName} §f删除成功"
-  List:
-    - "服务器有以下玩家识别符"
-    - "{GroupList}"
+PlayerNotFound: "§f[§c!§f] 找不到该玩家"
+Gift:
+  GetGift: "§f[§a!§f] 获取礼物 §b{GiftName} §f成功!"
+  SendGift: "§f[§a!§f] 给予礼物 §b{GiftName} §f于 §d{GiftTarget} §f成功!"
+  CantFindGift: "§f[§e!§f] 找不到该礼物"

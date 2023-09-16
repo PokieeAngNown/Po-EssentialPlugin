@@ -1,0 +1,9 @@
+##可用参数
+##item
+## 具体格式 item::物品::数量
+## 后接原版物品标签 例如 minecraft:diamond_sword
+## 支持tag 例如 minecraft"diamond_sword{Enchantments:[{id:"minecraft:sharpness", lvl:3}]}
+##vault
+## 具体格式 item::货币类型::数量
+NewbiePack:
+  - "item::minecraft:snowball::16"
