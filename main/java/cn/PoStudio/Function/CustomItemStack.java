@@ -9,13 +9,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class CustomItemStack {
     static String FileName;
@@ -24,15 +20,18 @@ public class CustomItemStack {
 
 
     private static class Item{
-        String name;
-        String id;
-        String displayName;
-        List<String> lore;
-        Map<String,String> option = null;
+        private String name;
+        private String id;
+        private String displayName;
+        private List<String> lore;
+        //private Map<String,String> option = null;
 
         public String getName(){
             return name;
         }
+        public String getId(){return id;}
+        public String getDisplayName(){return displayName;}
+        public List<String> getLore(){return lore;}
     }
 
     public static @NotNull Item getItem(String file, String itemID){
@@ -45,23 +44,22 @@ public class CustomItemStack {
         return item;
     }
 
-    public static @Nullable List<String> getItemFiles(){
+    public static @NotNull List<File> getItemFiles(){
         File f = new File(EssentialPluginAPI.getPlugin().getDataFolder() + "/itemStack");
         File[] fs = f.listFiles();
-        List<String> sl = new ArrayList<>();
-        if (fs == null){
-            return null;
-        }
-        for (File value : fs) {
-            sl.add(value.getName());
-        }
-        return sl;
+        assert fs != null;
+        return Arrays.asList(fs);
     }
 
-    public static @NotNull List<String> getItems(String file){
+    public static @NotNull List<Item> getItems(String file){
         File f = new File(EssentialPluginAPI.getPlugin().getDataFolder() + "/itemStack", file);
         FileConfiguration cfg = YamlConfiguration.loadConfiguration(f);
-        return new ArrayList<>(cfg.getKeys(false));
+        List<Item> list = new ArrayList<>();
+        Set<String> set = cfg.getKeys(false);
+        for (int i = 0; i < set.size(); i++) {
+            list.add(getItem(file, new ArrayList<>(set).get(i)));
+        }
+        return list;
     }
 
     public static void sendItemToPlayer(@NotNull Item item, @NotNull Player player){

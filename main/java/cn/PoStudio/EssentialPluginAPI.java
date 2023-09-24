@@ -125,6 +125,12 @@ public final class EssentialPluginAPI extends JavaPlugin {
         if (!new File(this.getDataFolder().getPath(), "language/zh_CN.yml").exists()) {
             this.saveResource("language/zh_CN.yml", true);
         }
+        if (!new File(this.getDataFolder().getPath(), "itemStack/example.yml").exists()) {
+            this.saveResource("itemStack/example.yml", true);
+        }
+        if (!new File(this.getDataFolder().getPath(), "itemStack/Notice thing.txt").exists()) {
+            this.saveResource("itemStack/Notice thing.txt", true);
+        }
         if (!new File(this.getDataFolder().getPath(), "playerData").mkdir()){
             getLogger().warning("Something wrong in Plugin. Plz report the wrong");
         }
