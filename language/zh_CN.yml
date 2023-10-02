@@ -19,6 +19,11 @@ InvalidCommand: "§f[§c!§f] 指令无效~\n§f[§c!§f] 用法: {Usage}"
 NoPermission: "§f[§c!§f] 无权限"
 PlayerNotFound: "§f[§c!§f] 找不到该玩家"
 Gift:
-  GetGift: "§f[§a!§f] 获取礼物 §b{GiftName} §f成功!"
-  SendGift: "§f[§a!§f] 给予礼物 §b{GiftName} §f于 §d{GiftTarget} §f成功!"
+  Get: "§f[§a!§f] 获取礼物 §b{GiftName} §f成功!"
+  Get2: "§f[§a!§f] 给予礼物 §b{GiftName} §f于 §d{Target} §f成功!"
   CantFindGift: "§f[§e!§f] 找不到该礼物"
+CustomItem:
+  Get: "§f[§a!§f] 获取物品 §b{ItemName} §f成功!"
+  Get2: "§f[§a!§f] 给予礼物 §b{ItemName} §f于 §d{Target} §f成功!"
+  CantFindFile: "§f[§e!§f] 找不到该文件"
+  CantFindItem: "§f[§e!§f] 无法在 §b{FileName} §f内找到该物品"

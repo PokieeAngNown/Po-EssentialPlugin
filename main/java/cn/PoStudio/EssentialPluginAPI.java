@@ -1,5 +1,6 @@
 package cn.PoStudio;
 
+import cn.PoStudio.Command.CustomItemCommand;
 import cn.PoStudio.Command.GiftCommand;
 import cn.PoStudio.Event.JoinExitEvent;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -99,10 +100,12 @@ public final class EssentialPluginAPI extends JavaPlugin {
 
     private void setupCommand(){
         Objects.requireNonNull(getCommand("gift")).setExecutor(new GiftCommand());
+        Objects.requireNonNull(getCommand("cItem")).setExecutor(new CustomItemCommand());
     }
 
     private void setupTab(){
         Objects.requireNonNull(getCommand("gift")).setTabCompleter(new GiftCommand());
+        Objects.requireNonNull(getCommand("cItem")).setTabCompleter(new CustomItemCommand());
     }
 
     /*

@@ -11,19 +11,22 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class CustomItemStack {
-    static String FileName;
-    protected final static File file = new File(EssentialPluginAPI.getPlugin().getDataFolder().getPath(), FileName);
-    protected final static FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+    static String FileName = "";
+    public static File file = new File(EssentialPluginAPI.getPlugin().getDataFolder() + "/itemStack", FileName);
+    public static FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
 
-    private static class Item{
-        private String name;
-        private String id;
-        private String displayName;
-        private List<String> lore;
+    public static class CItem{
+        private String name; //物品识别服
+        private String id; //物品在mc内的物品展示
+        private String displayName; //物品展示名称
+        private List<String> lore; //物品段落行
         //private Map<String,String> option = null;
 
         public String getName(){
@@ -32,15 +35,29 @@ public class CustomItemStack {
         public String getId(){return id;}
         public String getDisplayName(){return displayName;}
         public List<String> getLore(){return lore;}
+
+        public void setName(String str){
+            name = str;
+        }
+        public void setId(String str){
+            id = str;
+        }
+        public void setDisplayName(String str){
+            displayName = str;
+        }
+        public void setLore(List<String> strings){
+            lore = strings;
+        }
     }
 
-    public static @NotNull Item getItem(String file, String itemID){
-        FileName = file;
-        Item item = new Item();
+    public static @NotNull CItem getItem(String fileName, String itemID){
+        File f = new File(EssentialPluginAPI.getPlugin().getDataFolder() + "/itemStack", fileName);
+        FileConfiguration cfg = YamlConfiguration.loadConfiguration(f);
+        CItem item = new CItem();
         item.name = itemID;
-        item.id = config.getString(itemID + ".ID");
-        item.displayName = config.getString(itemID + ".Name");
-        item.lore = config.getStringList(itemID + ".Lore");
+        item.id = cfg.getString(itemID + ".ID");
+        item.displayName = cfg.getString(itemID + ".Name");
+        item.lore = cfg.getStringList(itemID + ".Lore");
         return item;
     }
 
@@ -48,21 +65,27 @@ public class CustomItemStack {
         File f = new File(EssentialPluginAPI.getPlugin().getDataFolder() + "/itemStack");
         File[] fs = f.listFiles();
         assert fs != null;
-        return Arrays.asList(fs);
+        List<File> file2 = new ArrayList<>();
+        for (File value : fs) {
+            if (value.getName().contains(".yml")) {
+                file2.add(value);
+            }
+        }
+        return file2;
     }
 
-    public static @NotNull List<Item> getItems(String file){
-        File f = new File(EssentialPluginAPI.getPlugin().getDataFolder() + "/itemStack", file);
+    public static @NotNull List<CItem> getItems(String fileName){
+        File f = new File(EssentialPluginAPI.getPlugin().getDataFolder() + "/itemStack", fileName);
         FileConfiguration cfg = YamlConfiguration.loadConfiguration(f);
-        List<Item> list = new ArrayList<>();
+        List<CItem> list = new ArrayList<>();
         Set<String> set = cfg.getKeys(false);
         for (int i = 0; i < set.size(); i++) {
-            list.add(getItem(file, new ArrayList<>(set).get(i)));
+            list.add(getItem(fileName, new ArrayList<>(set).get(i)));
         }
         return list;
     }
 
-    public static void sendItemToPlayer(@NotNull Item item, @NotNull Player player){
+    public static void sendItemToPlayer(@NotNull CItem item, @NotNull Player player){
         ItemStack itemStack = new ItemStack(Objects.requireNonNull(Material.matchMaterial(item.id)));
         ItemMeta itemMeta = itemStack.getItemMeta();
         assert itemMeta != null;
@@ -75,5 +98,11 @@ public class CustomItemStack {
 
         Inventory inventory = player.getInventory();
         inventory.addItem(itemStack);
+    }
+
+    public static boolean isItemInFile(@NotNull String fileName, @NotNull String itemName){
+        File f = new File(EssentialPluginAPI.getPlugin().getDataFolder() + "/itemStack", fileName);
+        FileConfiguration cfg = YamlConfiguration.loadConfiguration(f);
+        return cfg.getKeys(false).contains(itemName);
     }
 }

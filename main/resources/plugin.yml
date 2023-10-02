@@ -8,7 +8,11 @@ depend: [PlaceholderAPI]
 prefix: Po-EP
 commands:
   gift:
-    description: The command that can control group
+    description: The command that can use Gift
+    usage: "/gift get <GiftName> [Player]"
+  cItem:
+    description: The command that can use CustomItem
+    usage: "/item get <fileName> <itemID> [Player]"
   group:
     description: The Command that can control Group
     usage: /group <list/create/delete/addPlayer/removePlayer> [GroupName] [PlayerName]
