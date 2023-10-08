@@ -23,10 +23,3 @@ ServerIcon: "Icon.png"
 ##服务器列表里服务器展示的最大人数
 ##仅展示用 并不影响实际服务器设置的最大人数限制
 MaxPlayerDisplay: 100000
-###################################
-####自定义物品 (CustomItemStack)####
-###################################
-##将要读取的物品文件
-##文件需在文件夹itemStack内存放
-ItemFileInLoad:
-  - example.yml
